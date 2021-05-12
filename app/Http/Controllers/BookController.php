@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Author;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -14,7 +15,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $books = Book::all();
+        return view('books.index', ['books' => $books]);
     }
 
     /**
@@ -24,7 +26,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $authors = Author::all();
+        return view('books.create',['authors' => $authors]);
     }
 
     /**
@@ -35,7 +38,12 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book = new Book();
+        $book->title = $request->title;
+        $book->pages = $request->pages;
+        $book->author_id = $request->author_id;
+        $book->save();
+        return redirect()->route('books.index');
     }
 
     /**
@@ -57,7 +65,8 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        $authors = Author::all();
+        return view('books.edit', ['book' => $book, 'authors' => $authors]);
     }
 
     /**
@@ -69,7 +78,11 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $book->title = $request->title;
+        $book->pages = $request->pages;
+        $book->author_id = $request->author_id;
+        $book->save();
+        return redirect()->route('books.index');
     }
 
     /**
@@ -80,6 +93,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return redirect()->route('books.index');
     }
 }

@@ -1,21 +1,7 @@
 <h1>autoriu index page</h1>
 
 <style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
+
   </style>
 
   
@@ -35,6 +21,15 @@ table {
         <td>{{$author->surname}}</td>
         {{-- <td>{!!"<b>labas</b>"!!}</td> --}}
         <td>{{$author->age}}</td>
+        <td>
+          <a href="{{route('authors.edit',$author)}}">edit</a>
+        </td>
+        <td>
+          <form action="{{route('authors.destroy',$author)}}" method="post">
+            @csrf
+            <button type="submit">trinti</button>
+          </form>
+      </td>
       </tr>
     @endforeach
 </table>
