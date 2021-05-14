@@ -1,12 +1,47 @@
+@extends('layouts.app')
 
-<form method="post" action="{{route('authors.store')}}">
+@section('content')
+<div class="container">
+   <div class="row justify-content-center">
+       <div class="col-md-8">
+           <div class="card">
+               <div class="card-header">Autoriaus create'as</div>
 
-    @csrf
-    <label for="name">First name:</label><br>
-    <input type="text" id="name" name="name" value="John"><br>
-    <label for="surname">First name:</label><br>
-    <input type="text" id="surname" name="surname" value="John"><br>
-    <label for="age">age:</label><br>
-    <input type="text" id="age" name="age" value="20"><br><br>
-    <input type="submit" value="Submit">
-  </form> 
+               <div class="card-body">
+                <form method="post" action="{{route('authors.store')}}">
+                    @csrf
+
+                    <div class="form-group">
+                        <label>First name:</label>
+                        <input type="text" name="name"  class="form-control">
+                        <small class="form-text text-muted">Autoriaus vardas.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Last name:</label>
+                        <input type="text" name="surname"  class="form-control">
+                        <small class="form-text text-muted">Autoriaus pavardė.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Age:</label>
+                        <input type="text" name="age"  class="form-control">
+                        <small class="form-text text-muted">Amžius.</small>
+                    </div>
+
+                    <input type="submit" value="Submit">
+                </form> 
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+@endsection
+
+
+
+
+         
+
+
+

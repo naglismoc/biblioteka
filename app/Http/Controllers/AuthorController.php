@@ -41,7 +41,7 @@ class AuthorController extends Controller
         $author->surname = $request->surname;
         $author->age = $request->age;
         $author->save();
-        return redirect()->route('authors.index');
+        return redirect()->route('authors.index')->with('success_message', 'Autorius sėkmingai sukurtas');
     }
 
     /**
@@ -79,7 +79,7 @@ class AuthorController extends Controller
         $author->surname = $request->surname;
         $author->age = $request->age;
         $author->save();
-        return redirect()->route('authors.index');
+        return redirect()->route('authors.index')->with('success_message', 'Autorius sėkmingai atnaujintas');;
     }
 
     /**
@@ -90,7 +90,12 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
+      if($author->books()->count() > 0){
+        
+
+        return redirect()->route('authors.index')->with('info_message', 'Autorius '. $author->name.' '. $author->surname .' negali būti ištrintas. Parašytų knygų yra: '.$author->books()->count());
+      }
         $author->delete();
-        return redirect()->route('authors.index');
+        return redirect()->route('authors.index')->with('success_message', 'Autorius sėkmingai ištrintas');
     }
 }
